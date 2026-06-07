@@ -1,4 +1,4 @@
-# Retrospectiva — Cierre de Brecha 1 (C1)
+# Retrospectiva — CapacityAr 1 (C2)
 
 **Período:** Mayo – Junio 2026  
 **Proyecto:** CapacityAR — Sistema de Tutoría Inteligente
