@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, Link } from "wouter";
-import { Bell, Home, BookOpen, GraduationCap, LineChart, MessageSquare, Users, AlertCircle, FileText } from "lucide-react";
+import { Bell, Home, BookOpen, GraduationCap, LineChart, MessageSquare, Users, AlertCircle, FileText,BarChart3 } from "lucide-react";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -24,6 +24,7 @@ export function AppLayout({ children, activePage, userRole = "candidato", userNa
     { name: "Mis Candidatos", path: "/panel-tutor", icon: Users },
     { name: "Alertas", path: "/panel-tutor", icon: AlertCircle },
     { name: "Reportes", path: "/panel-tutor", icon: FileText },
+    { name: "Métricas CAME", path: "/dashboard-tutor", icon: BarChart3 },
   ];
 
   const links = isCandidato ? candidatoLinks : tutorLinks;
@@ -97,10 +98,19 @@ export function AppLayout({ children, activePage, userRole = "candidato", userNa
         <header className="h-[72px] flex-shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-8 z-10">
           <h2 className="text-xl font-bold text-[#1E293B]">{activePage}</h2>
           <div className="flex items-center gap-6">
+            
+            <Link href="/dashboard-tutor">
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-indigo-50 border border-indigo-100 rounded-xl text-xs font-semibold text-[#4F46E5] hover:bg-indigo-100 transition-all cursor-pointer">
+                <BarChart3 className="w-3.5 h-3.5" />
+                Vista Tutor (CAME)
+              </div>
+            </Link>
+
             <button className="relative text-[#64748B] hover:text-[#1E293B] transition-colors">
               <Bell className="w-6 h-6" />
               <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
             </button>
+            
             <div className="flex items-center gap-3 border-l border-slate-200 pl-6">
               <div className="text-right hidden sm:block">
                 <div className="text-sm font-semibold">{userName}</div>

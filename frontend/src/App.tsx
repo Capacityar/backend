@@ -12,6 +12,7 @@ import { ProgresoyLogros } from "@/pages/ProgresoyLogros";
 import { CanalTutor } from "@/pages/CanalTutor";
 import { PanelTutor } from "@/pages/PanelTutor";
 import { DetalleCandidato } from "@/pages/DetalleCandidato";
+import DashboardTutor from "@/pages/DashboardTutor";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function Router() {
       <Route path="/canal-tutor" component={CanalTutor} />
       <Route path="/panel-tutor" component={PanelTutor} />
       <Route path="/detalle-candidato" component={DetalleCandidato} />
+      <Route path="/dashboard-tutor" component={DashboardTutor} />
       <Route path="/demo-api" component={DemoApi} />
       <Route component={NotFound} />
     </Switch>
