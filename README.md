@@ -1,12 +1,21 @@
-# Capacitaya
+# capacityAr — Plataforma IA de Brecha de Habilidades
 
-Plataforma de aprendizaje adaptativo orientada a reducir la brecha entre secundaria y mercado laboral IT.
+> Proyecto universitario de Ingeniería de Software I (nota 10).
+> Rol: **Scrum Master** en equipo de 13 personas.
+
+Plataforma de análisis de brecha de habilidades y capacitación IT con IA para PYMES argentinas. MVP desplegado en Render con integración de Groq Llama + Gemini.
 
 Stack:
 
 - **Backend**: Python 3.12, FastAPI, SQLAlchemy, PostgreSQL
 - **Frontend**: React 19, Vite, Tailwind CSS
 - **Deploy**: Render (backend + frontend como estático) + Neon (PostgreSQL serverless)
+
+**Aprendizajes clave:**
+- Coordinación de ceremonias ágiles en equipo multidisciplinario
+- Arquitectura backend modular (router/service/repository)
+- Integración de IA generativa con fallback mock
+- Deploy serverless con CI/CD
 
 ---
 
