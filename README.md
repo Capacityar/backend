@@ -1,4 +1,4 @@
-# capacitaya — Backend API
+# capacityAR — Backend API
 
 API REST de capacityAr, plataforma IA de brecha de habilidades.
 
