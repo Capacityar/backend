@@ -1,9 +1,7 @@
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from pathlib import Path
 
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
 
 from app.config import settings
 from app.database import SessionLocal, create_db_tables
@@ -46,13 +44,3 @@ app.include_router(student_attempts_router, prefix="/api")
 app.include_router(gap_analysis_router, prefix="/api")
 app.include_router(student_gap_analyses_router, prefix="/api")
 app.include_router(user_skills_router, prefix="/api")
-
-_FRONTEND_DIR = Path("frontend/dist/public")
-
-
-@app.get("/{full_path:path}", include_in_schema=False)
-def serve_frontend(full_path: str) -> FileResponse:
-    candidate = _FRONTEND_DIR / full_path
-    if candidate.is_file():
-        return FileResponse(candidate)
-    return FileResponse(_FRONTEND_DIR / "index.html")

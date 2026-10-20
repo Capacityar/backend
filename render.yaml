@@ -2,19 +2,12 @@ services:
   - type: web
     name: capacity-ar-api
     runtime: python
-    nixPackages:
-      - nodejs
-    buildCommand: >-
-      pip install -r requirements.txt &&
-      cd frontend/ &&
-      npm install &&
-      PORT=3000 BASE_PATH=/ npm run build &&
-      cd ../
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: APP_ENV
-  value: production
+        value: production
       - key: APP_DEBUG
-  value: false
+        value: false
       - key: DATABASE_URL
-  sync: false
+        sync: false
