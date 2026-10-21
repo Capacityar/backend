@@ -285,7 +285,7 @@ ORDER BY skill_name, phase, id;
 DELETE FROM resources WHERE skill_name = 'JavaScript';
 ```
 
-Detalles en [resources-design.md](resources-design.md).
+Detalles en [resources-design.md](https://github.com/Capacityar/.github/blob/main/docs/resources-design.md).
 
 ---
 
@@ -353,4 +353,4 @@ Entrar a https://capacity-ar-ap.onrender.com/docs , clickear el endpoint, "Try i
 
 ## Contrato de datos
 
-Contrato completo del GapReport y reglas de cálculo en [gap-engine-mvp.md](gap-engine-mvp.md).
+Contrato completo del GapReport y reglas de cálculo en [gap-engine-mvp.md](https://github.com/Capacityar/.github/blob/main/docs/gap-engine-mvp.md).
