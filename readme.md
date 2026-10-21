@@ -74,9 +74,9 @@ DATABASE_URL=sqlite:///./capacity_ar_local.db
 
 ## Documentación
 
-- [Backlog completo](docs/backlog.md)
-- [Informe técnico](docs/informe-tecnico.md)
+- [Backlog completo](https://github.com/Capacityar/.github/blob/main/docs/backlog.md)
+- [Informe técnico](https://github.com/Capacityar/.github/blob/main/docs/informe-tecnico.md)
 - [Arquitectura backend](docs/backend-onboarding.md)
 - [Integración con IA](docs/ai-integration.md)
-- [Cobertura 5P](docs/5p-coverage.md)
-- [Matriz de accesos](docs/access-matrix.md)
+- [Cobertura 5P](https://github.com/Capacityar/.github/blob/main/docs/5p-coverage.md)
+- [Matriz de accesos](https://github.com/Capacityar/.github/blob/main/docs/access-matrix.md)
