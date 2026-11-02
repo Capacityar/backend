@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     app_debug: bool = False
     database_url: str = "postgresql+psycopg://postgres:postgres@localhost:5432/capacity_ar"
     plan_generator: str = "mock"
+    llm_timeout_seconds: float = 30.0
     gemini_api_key: str | None = None
     gemini_model: str = "gemini-2.0-flash"
     groq_api_key: str | None = None
