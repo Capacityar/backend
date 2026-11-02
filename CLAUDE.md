@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project context
 
-Capacity AR API: MVP backend para una plataforma de aprendizaje adaptativo (5P + ITS con tutoría humana). El sistema se divide en dos equipos sobre el **mismo monolito modular** — Equipo 1 produce `GapReport`, Equipo 2 (este repo, módulos principales `learning_paths`, `attempts`, `resources`) lo consume y produce un plan pedagógico que el alumno luego ejecuta. Ver `docs/scope-equipos.md` para el contrato entre equipos.
+Capacity AR API: MVP backend para una plataforma de aprendizaje adaptativo (5P + ITS con tutoría humana). El sistema se divide en dos equipos sobre el **mismo monolito modular** — Equipo 1 produce `GapReport`, Equipo 2 (este repo, módulos principales `learning_paths`, `attempts`, `resources`) lo consume y produce un plan pedagógico que el alumno luego ejecuta. Ver [docs/scope-equipos.md](https://github.com/Capacityar/.github/blob/main/docs/scope-equipos.md) para el contrato entre equipos.
 
 Stack: Python 3.12, FastAPI, SQLAlchemy 2.x síncrono, PostgreSQL en producción (Render + Neon), SQLite válido para desarrollo local. IA generativa vía Groq (default) o Google Gemini.
 
@@ -96,7 +96,7 @@ Ver `docs/ai-integration.md` para detalles de la estrategia híbrida, manejo de 
 
 ### Contratos entre equipos
 
-El módulo `learning_paths` recibe un `GapReport` (definido en `app/modules/learning_paths/schemas.py`, alineado con `docs/gap-engine-mvp.md`). Si el formato del GapReport cambia, **es un cambio de contrato entre equipos** — coordinar antes de tocar los schemas.
+El módulo `learning_paths` recibe un `GapReport` (definido en `app/modules/learning_paths/schemas.py`, alineado con [docs/gap-engine-mvp.md](https://github.com/Capacityar/.github/blob/main/docs/gap-engine-mvp.md)). Si el formato del GapReport cambia, **es un cambio de contrato entre equipos** — coordinar antes de tocar los schemas.
 
 `SkillStatus` values: `READY`, `NEEDS_WORK`, `MISSING`. Si todas las skills llegan en `READY`, `create_learning_path` devuelve 409 (no genera plan vacío).
 
@@ -108,11 +108,11 @@ El módulo `learning_paths` recibe un `GapReport` (definido en `app/modules/lear
 learning_path_id + module_index + unit_index + exercise_index
 ```
 
-El service abre el `plan_json` del path y busca el ejercicio en esa posición. Trade-off documentado en `docs/training-module-design.md`. Cuando se normalicen los exercises a tabla propia, este endpoint pasa a usar `exercise_id`.
+El service abre el `plan_json` del path y busca el ejercicio en esa posición. Trade-off documentado en [docs/training-module-design.md](https://github.com/Capacityar/.github/blob/main/docs/training-module-design.md). Cuando se normalicen los exercises a tabla propia, este endpoint pasa a usar `exercise_id`.
 
 ### Roles y acceso
 
-`UserRole`: `student | tutor | company_admin | admin`. La matriz completa de permisos por entidad está en `docs/access-matrix.md`. **Auth está diferida intencionalmente** (decisión documentada) — los endpoints son públicos en MVP. Cuando se sume `auth/`, los chequeos van como dependency, no cambia la matriz.
+`UserRole`: `student | tutor | company_admin | admin`. La matriz completa de permisos por entidad está en [docs/access-matrix.md](https://github.com/Capacityar/.github/blob/main/docs/access-matrix.md). **Auth está diferida intencionalmente** (decisión documentada) — los endpoints son públicos en MVP. Cuando se sume `auth/`, los chequeos van como dependency, no cambia la matriz.
 
 Regla de visibilidad relevante para diseñar nuevos endpoints:
 - estudiante nunca ve su `readiness_score` numérico crudo ni sus alertas
@@ -123,7 +123,7 @@ Regla de visibilidad relevante para diseñar nuevos endpoints:
 
 Implementado: Pasión, Play, Práctica (en `prompts.py`), Paciencia (en `attempts/feedback.py`).
 Pendiente: Perseverancia (módulos `student_metrics` y `alerts`).
-Ver `docs/5p-coverage.md` para el mapeo detallado y por qué Paciencia/Perseverancia son transversales (no fases del plan).
+Ver [docs/5p-coverage.md](https://github.com/Capacityar/.github/blob/main/docs/5p-coverage.md) para el mapeo detallado y por qué Paciencia/Perseverancia son transversales (no fases del plan).
 
 ## Convenciones específicas del proyecto
 
