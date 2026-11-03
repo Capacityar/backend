@@ -177,11 +177,22 @@ def _mock_resources(skill_name: str, phase: str) -> list[Resource]:
 
 
 def suggest_resources(
-    skill_name: str, phase: str, language: str = "es"
+    skill_name: str,
+    phase: str,
+    language: str = "es",
+    allow_llm: bool = True,
 ) -> list[Resource]:
     instructions = _PHASE_INSTRUCTIONS.get(phase)
     if instructions is None:
         return []
+
+    if not allow_llm:
+        logger.info(
+            "LLM bypassed (plan degraded to mock) — using mock resources for skill=%s phase=%s",
+            skill_name,
+            phase,
+        )
+        return _mock_resources(skill_name, phase)
 
     try:
         client = _build_client()
@@ -216,6 +227,14 @@ Devolve un JSON con la lista 'resources' segun el schema.
 
     try:
         response = client.generate_json(prompt, _RESPONSE_SCHEMA, temperature=0.6)
+    except TimeoutError:
+        logger.warning(
+            "Resource suggestion timed out after %ss for skill=%s phase=%s; returning empty list.",
+            settings.llm_timeout_seconds,
+            skill_name,
+            phase,
+        )
+        return []
     except Exception:
         logger.exception(
             "Resource suggestion failed for skill=%s phase=%s", skill_name, phase

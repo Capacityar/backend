@@ -102,6 +102,13 @@ Devolve un JSON con la clave 'message' conteniendo el mensaje generado.
         response = client.generate_json(prompt, _FEEDBACK_SCHEMA, temperature=0.8)
         message = response.get("message", "").strip()
         return message or _STATIC_FAILURE_MESSAGE
+    except TimeoutError:
+        logger.warning(
+            "LLM timed out after %ss generating failure feedback for skill=%s; using static.",
+            settings.llm_timeout_seconds,
+            skill_name,
+        )
+        return _STATIC_FAILURE_MESSAGE
     except Exception:
         logger.exception(
             "LLM failed to generate failure feedback for skill=%s; using static.",

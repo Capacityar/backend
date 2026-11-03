@@ -30,10 +30,11 @@ def create_learning_path(
 
 
 def _enrich_with_resources(plan: GeneratedPlan, db: Session) -> GeneratedPlan:
+    allow_llm = plan.generator_used != "mock"
     for module in plan.modules:
         for unit in module.units:
             stored = resources_service.get_or_suggest(
-                db, module.skill_name, unit.phase.value
+                db, module.skill_name, unit.phase.value, allow_llm=allow_llm
             )
             unit.resources = [ResourceView.model_validate(r) for r in stored]
     return plan

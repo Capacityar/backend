@@ -7,7 +7,7 @@ from app.modules.resources.schemas import ResourceView
 
 
 # Entrada: GapReport del Equipo 1.
-# El formato sigue lo definido en docs/gap-engine-mvp.md.
+# El formato sigue lo definido en https://github.com/Capacityar/.github/blob/main/docs/gap-engine-mvp.md.
 
 
 class SkillPriority(str, Enum):

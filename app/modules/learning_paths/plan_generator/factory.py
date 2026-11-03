@@ -17,6 +17,12 @@ class _PlanGeneratorWithMockFallback:
     def generate(self, gap_report: GapReport) -> GeneratedPlan:
         try:
             return self._primary.generate(gap_report)
+        except TimeoutError:
+            logger.warning(
+                "Primary plan generator timed out after %ss; falling back to MockPlanGenerator.",
+                settings.llm_timeout_seconds,
+            )
+            return self._fallback.generate(gap_report)
         except Exception:
             logger.exception(
                 "Primary plan generator failed; falling back to MockPlanGenerator."

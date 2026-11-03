@@ -4,6 +4,7 @@ from typing import Any, Protocol
 
 from pydantic import ValidationError
 
+from app.config import settings
 from app.modules.learning_paths.plan_generator.prompts import build_unit_prompt
 from app.modules.learning_paths.schemas import (
     GapReport,
@@ -14,6 +15,7 @@ from app.modules.learning_paths.schemas import (
     LearningPhase,
     SkillStatus,
 )
+from app.shared.llm import LlmTimeoutError
 
 
 logger = logging.getLogger(__name__)
@@ -88,13 +90,27 @@ class LlmBackedPlanGenerator:
             for phase in _UNIT_PHASES
         ]
 
-        with ThreadPoolExecutor(max_workers=_MAX_PARALLEL_CALLS) as executor:
+        timeout = settings.llm_timeout_seconds
+        executor = ThreadPoolExecutor(max_workers=_MAX_PARALLEL_CALLS)
+        try:
             generated_units = list(
                 executor.map(
                     lambda job: self._generate_unit(job[1], job[2], gap_report),
                     unit_jobs,
+                    timeout=timeout,
                 )
             )
+        except TimeoutError as exc:
+            logger.warning(
+                "Plan generation with '%s' timed out after %ss.",
+                self.generator_name,
+                timeout,
+            )
+            raise LlmTimeoutError(
+                f"Plan generation with '{self.generator_name}' timed out after {timeout}s"
+            ) from exc
+        finally:
+            executor.shutdown(wait=False, cancel_futures=True)
 
         modules: list[GeneratedModule] = []
         for skill_index, skill in enumerate(skills_to_train):
