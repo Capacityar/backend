@@ -15,9 +15,6 @@ from app.modules.attempts.feedback import (
     _STATIC_FAILURE_MESSAGE,
     generate_feedback,
 )
-from app.modules.learning_paths.plan_generator._base_llm import (
-    LlmBackedPlanGenerator,
-)
 from app.modules.learning_paths.plan_generator.factory import (
     _PlanGeneratorWithMockFallback,
     get_plan_generator,

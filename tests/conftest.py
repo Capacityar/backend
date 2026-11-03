@@ -66,6 +66,9 @@ def force_test_settings(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(settings, "database_url", TEST_DATABASE_URL)
     monkeypatch.setattr(app.database, "engine", engine)
     monkeypatch.setattr(app.database, "SessionLocal", TestingSessionLocal)
+    # app.main importa SessionLocal por valor: hay que reapuntarlo para que el
+    # lifespan (create_db_tables + seed) use el engine en memoria y no el de disco.
+    monkeypatch.setattr("app.main.SessionLocal", TestingSessionLocal)
 
 
 @pytest.fixture
