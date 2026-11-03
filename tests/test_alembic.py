@@ -1,8 +1,6 @@
 from alembic.config import Config
 from alembic.script import ScriptDirectory
 
-from app.config import settings
-
 
 def test_alembic_config_and_migrations_exist() -> None:
     alembic_cfg = Config("alembic.ini")
@@ -21,7 +19,7 @@ def test_alembic_env_targets_all_models() -> None:
     import app.modules.resources.models
     import app.modules.skills.models
     import app.modules.users.models
-    import app.modules.user_skills.models
+    import app.modules.user_skills.models  # noqa: F401
 
     table_names = set(Base.metadata.tables.keys())
     expected_tables = {

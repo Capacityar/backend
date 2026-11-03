@@ -2,6 +2,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from fastapi import status
 from fastapi.testclient import TestClient
+import pytest
 
 from scripts.load_test import (
     build_attempt_payload,
@@ -34,6 +35,13 @@ def test_compute_percentile_and_summarize_stage() -> None:
     assert summary.p99_ms == 99.1
 
 
+@pytest.mark.skip(
+    reason=(
+        "requiere una sesion de DB por request; el harness unitario comparte "
+        "una unica sesion SQLite en memoria y no es thread-safe. La carga real "
+        "se mide con scripts/load_test.py y k6_load_test.js"
+    )
+)
 def test_critical_endpoints_smoke_load(client: TestClient) -> None:
     # 1. Create initial learning path
     seed_email = "smoke.load@example.com"
