@@ -13,6 +13,7 @@ from app.modules.learning_paths.router import router as learning_paths_router, s
 from app.modules.skills.router import router as skills_router
 from app.modules.skills.seed import seed_skills_if_empty
 from app.modules.user_skills.router import router as user_skills_router
+from app.modules.auth import router as auth_router
 from app.modules.users.router import router as users_router
 
 
@@ -43,6 +44,7 @@ def health_check() -> dict[str, str]:
     return {"status": "ok", "environment": settings.app_env}
 
 
+app.include_router(auth_router, prefix="/api")
 app.include_router(users_router, prefix="/api")
 app.include_router(skills_router, prefix="/api")
 app.include_router(job_descriptions_router, prefix="/api")

@@ -13,7 +13,7 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    pass
+    password_hash: str = ""
 
 
 class UserUpdate(BaseModel):
